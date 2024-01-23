@@ -14,7 +14,7 @@ function basePath($path = ''){
 *@return void
 */
 
-function lodeView($name){
+function loadView($name){
     $viewPath = basePath("views/{$name}.view.php");
 
     if(file_exists($viewPath)){
