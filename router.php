@@ -1,6 +1,15 @@
 <?php
 class Router {
     protected $routes = [];
+
+    /**
+     * Add a new route
+     *
+     * @param string $metod
+     * @param string $uri
+     * @param string $controller
+     * @return void
+     */
     public function registerRoute($metod,$uri,$controller){
              $this -> routes[] = [
             "method" => $metod,
