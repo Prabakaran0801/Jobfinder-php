@@ -1,0 +1,16 @@
+{
+    "name": "prabakran0801/jobfinder-php",
+    "description": "Job finding application",
+    "author": [
+        {
+            "name": "prabakaran",
+            "email": "karanpk0108@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}
