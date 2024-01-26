@@ -1,7 +1,7 @@
 <?php
-require '../helper.php';
-require basePath("Router.php");
-require basePath('Database.php');
+require "../helper.php";
+require basePath("Framework/Router.php");
+require basePath("Framework/Database.php");
 
 
 //Itanciate the route
