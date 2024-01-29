@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . "/../vendor/autoload.php";
 require "../helper.php";
- use Framework\Router;
+
+use Framework\Router;
 //spl_autoload_register(function ($class){
 //    $path = basePath("Framework/" . $class . ".php");
 //   if(file_exists($path)){
@@ -16,8 +17,8 @@ $router = new Router();
 $routes = require basePath('routes.php');
 
 //Get current URI and HTTP method
-$uri = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
-$method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
 
 //Route the request
-$router -> route($uri,$method);
+$router->route($uri);
