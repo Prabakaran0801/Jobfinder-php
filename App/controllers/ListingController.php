@@ -69,14 +69,14 @@ class ListingController
 
     public function store()
     {
-        $allowFields = ["title", "description", "salary", "requirements", "benefits", "company", "address", "city", "state", "phone", "email"];
+        $allowFields = ["title", "description", "salary", "requirement", "benefits", "tags", "company", "address", "city", "state", "phone", "email"];
 
         $newListingData = array_intersect_key($_POST, array_flip($allowFields));
         $newListingData["user_id"] = 1;
 
         $newListingData = array_map("sanitize", $newListingData);
 
-        $requiredFields = ["title", "description", "email", "city", "state"];
+        $requiredFields = ["title", "description", "salary", "email", "city", "state"];
 
         $errors = [];
 
@@ -93,7 +93,29 @@ class ListingController
             ]);
         } else {
             //Submit Data
-            echo "Submit was success!";
+
+            $fields = [];
+            foreach ($newListingData as $field => $value) {
+                $fields[] = $field;
+            }
+
+            $fields = implode(", ", $fields);
+
+            $values = [];
+
+            foreach ($newListingData as $field => $value) {
+                //Convert empty string to Null
+                if ($value === '') {
+                    $newListingData[$field] = null;
+                }
+                $values[] = ':' . $field;
+            }
+            $values =  implode(',', $values);
+
+            $query = "INSERT INTO listings({$fields}) VALUES({$values}) ";
+            $this->db->query($query, $newListingData);
+
+            redirect("/listings");
         }
     }
 }
