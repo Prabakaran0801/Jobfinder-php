@@ -22,7 +22,6 @@ class ListingController
      */
     public function index()
     {
-
         $listings = $this->db->query("SELECT * FROM listings")->fetchAll();
         loadView("listings/index", ["listings" => $listings]);
     }
@@ -61,5 +60,21 @@ class ListingController
         loadView("listings/show", [
             "listings" => $listings
         ]);
+    }
+    /**
+     *Store data in Database
+     *   
+     *@return void
+     */
+
+    public function store()
+    {
+        $allowFields = ["title", "description", "salary", "requirements", "benefits", "company", "address", "city", "state", "phone", "email"];
+
+        $newListingData = array_intersect_key($_POST, array_flip($allowFields));
+        $newListingData["user_id"] = 1;
+
+        $newListingData = array_map("sanitize", $newListingData);
+        inspectAndDie($newListingData);
     }
 }
