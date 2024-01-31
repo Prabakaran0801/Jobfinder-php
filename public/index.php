@@ -1,9 +1,15 @@
 <?php
-session_start();
 require __DIR__ . "/../vendor/autoload.php";
-require "../helper.php";
 
 use Framework\Router;
+use Framework\Session;
+
+//Session::start();
+
+
+require "../helper.php";
+
+//Custom auto loader
 //spl_autoload_register(function ($class){
 //    $path = basePath("Framework/" . $class . ".php");
 //   if(file_exists($path)){
