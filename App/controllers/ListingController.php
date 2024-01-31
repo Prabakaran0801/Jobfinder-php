@@ -178,6 +178,12 @@ class ListingController
             ErrorController::notFound("Listing not found");
             return;
         }
+        //Authorization
+
+        if (!Authorization::isOwner($listings->user_id)) {
+            Session::setFlashMessage('error_message', 'You are not authorized  to edit this listing');
+            return redirect('/listings/' . $listings->id);
+        }
 
         loadView("listings/edit", [
             "listings" => $listings
@@ -198,11 +204,19 @@ class ListingController
         ];
         $listings = $this->db->query("SELECT * FROM listings  WHERE  id = :id", $params)->fetch();
 
-        //Check iflisting exists
+        //Check if listing exists
         if (!$listings) {
             ErrorController::notFound("Listing not found");
             return;
         }
+
+        //Authorization
+
+        if (!Authorization::isOwner($listings->user_id)) {
+            Session::setFlashMessage('error_message', 'You are not authorized  to update this listing');
+            return redirect('/listings/' . $listings->id);
+        }
+
         $allowFields = ["title", "description", "salary", "requirement", "benefits", "tags", "company", "address", "city", "state", "phone", "email"];
 
         $updateValues = [];
